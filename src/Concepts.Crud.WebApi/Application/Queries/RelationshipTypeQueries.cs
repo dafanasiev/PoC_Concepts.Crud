@@ -9,7 +9,6 @@ public class RelationshipTypeQueries(ICrudContext context) : IRelationshipTypeQu
     public async Task<ICollection<RelationshipType>> GetActivityRelationshipType(CancellationToken ct)
     {
         return await context.RelationshipTypeSet
-            .Where(x => x.GC == null)
             .Select(c => new RelationshipType
             {
                 Id = c.Id,

@@ -10,7 +10,6 @@ public class RelationshipQueries(ICrudContext context, IEntityRefHrefProvider en
     {
         var activity = await context
             .ActivitySet
-            .Where(x => x.GC == null)
             .AsNoTracking()
             .AnyAsync(x => x.Id == activityId, ct);
 

@@ -19,8 +19,7 @@ public class ActivityQueries(
     )
     {
         var alist = context.ActivitySet
-            .Where(x => x.GC == null
-                        && (filter.code == null || x.Code == filter.code)
+            .Where(x => (filter.code == null || x.Code == filter.code)
                         && (filter.name == null || x.Name == filter.name)
                         && (filter.description == null ||
                             (x.Description != null && x.Description.Contains(filter.description!)))
@@ -89,7 +88,6 @@ public class ActivityQueries(
         var rv = new List<ActivityGraph>();
         await foreach (var activityGraph in context
                            .ActivityGraphSet
-                           .Where(x => x.GC == null)
                            .AsNoTrackingWithIdentityResolution()
                            .Include(x => x.ActivityRelationshipList)
                            .ThenInclude(x => x.RelationshipType)
