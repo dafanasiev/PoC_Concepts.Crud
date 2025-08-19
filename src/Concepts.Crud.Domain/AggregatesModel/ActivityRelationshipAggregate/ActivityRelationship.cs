@@ -48,4 +48,5 @@ public class ActivityRelationship
         ActivityGraphId = activityGraph.Id;
 #endif
     }
+
 }

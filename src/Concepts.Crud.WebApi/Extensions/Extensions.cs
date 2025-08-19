@@ -35,6 +35,8 @@ internal static class Extensions
         services.AddHttpContextAccessor();
 
         // infrastructure services and its options
+        services.AddSingleton<SoftDeleteInterceptor>();
+
         services.AddTransient<IIdentityService, IdentityService>();
 
         services.AddTransient<IEntityRefHrefProvider, EntityRefHrefProvider>();
@@ -52,10 +54,11 @@ internal static class Extensions
             .BindConfiguration("ProblemHrefProvider")
             .ValidateDataAnnotations();
         
-        services.AddDbContext<ICrudContext, CrudContext>(o =>
+        services.AddDbContext<ICrudContext, CrudContext>((p, o) =>
         {
             o.UseNpgsql(builder.Configuration.GetSection("Database")["crud"])
-                ; //.UseLazyLoadingProxies();
+                .AddInterceptors(p.GetRequiredService<SoftDeleteInterceptor>());
+                ; //.UseLazyLoadingProxies(); //TODO: think about laziness...
 
             o.EnableSensitiveDataLogging();
         });

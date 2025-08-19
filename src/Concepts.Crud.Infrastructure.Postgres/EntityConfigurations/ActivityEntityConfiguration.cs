@@ -44,18 +44,20 @@ public class ActivityEntityConfiguration
         e.Property(x => x.GC)
             .HasColumnName("gc")
             .IsRequired(false)
-            .HasDefaultValue(null);
+            .HasDefaultValue(null)
+            ;
 
+        e.HasQueryFilter(x=>x.GC == null);
+        e.HasIndex(x => x.GC, "gc is null");
+        
         e.HasOne(r => r.Type)
             .WithMany(r => r.ActivityList)
             .HasPrincipalKey(x => x.Id)
-            .IsRequired()
-            .OnDelete(DeleteBehavior.ClientSetNull);
+            .IsRequired();
 
         e.HasOne(x => x.Type)
             .WithMany(x => x.ActivityList)
             .HasForeignKey(x => x.TypeId)
-            .IsRequired()
-            .OnDelete(DeleteBehavior.ClientSetNull);
+            .IsRequired();
     }
 }

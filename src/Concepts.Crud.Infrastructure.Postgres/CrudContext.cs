@@ -52,7 +52,7 @@ public class CrudContext
     }
 
     abstract class DbSetWap<T>(DbSet<T> dbSet) : IMutableQueryable<T>
-        where T : SimpleEntity<Guid>
+        where T : SimpleEntity
     {
         protected readonly DbSet<T> dbSet = dbSet;
 

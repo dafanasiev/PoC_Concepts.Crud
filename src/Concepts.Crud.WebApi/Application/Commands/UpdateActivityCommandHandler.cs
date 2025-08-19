@@ -3,6 +3,7 @@ using Concepts.Crud.Domain.AggregatesModel.ActivityRelationshipAggregate;
 using Concepts.Crud.Domain.AggregatesModel.ActivityTypeAggregate;
 using Concepts.Crud.Domain.AggregatesModel.EntityRefAggregate;
 using Concepts.Crud.Domain.AggregatesModel.RelationshipTypeAggregate;
+using Concepts.Crud.Domain.SeedWork;
 using Concepts.Crud.Infrastructure.Idempotency;
 using Concepts.Crud.WebApi.Application.Queries;
 using Activity = Concepts.Crud.WebApi.Application.Models.Activity;
@@ -57,11 +58,9 @@ public class UpdateActivityCommandHandler
                 throw new KeyNotFoundException("activity type not found");
             }
 
-            var arl = new List<Domain.AggregatesModel.ActivityAggregate.Activity.SetRelationshipListArgItem>();
+            var arl = new List<ActivityRelationship>();
             foreach (var dr in d.Relationship)
             {
-                var arlItem = new Domain.AggregatesModel.ActivityAggregate.Activity.SetRelationshipListArgItem();
-
                 var art = await _relationshipTypeRepository.FindById(dr.RelationshipType.Id, ct);
                 if (art == null)
                 {
@@ -76,8 +75,7 @@ public class UpdateActivityCommandHandler
                     throw new KeyNotFoundException("targetSpecification type not found");
                 }
 
-                arlItem.RelationshipType = art;
-                arlItem.TargetSpecification = ats;
+                var arlItem = new ActivityRelationship(a, art, ats);
                 arl.Add(arlItem);
             }
 
@@ -89,8 +87,7 @@ public class UpdateActivityCommandHandler
                 a.SetName(d.Name);
                 a.SetDescription(d.Description);
                 a.SetIsGroup(d.IsGroup);
-                a.SetRelationshipList(arl);
-
+                a.SetRelationshipList(arl, SetListValueMode.Replace);
                 a.EndEdit();
             }
             catch (Exception e)
@@ -101,7 +98,7 @@ public class UpdateActivityCommandHandler
                 throw;
             }
 
-            await _activityRepository.UnitOfWork.SaveChangesAsync(ct);
+            //await _activityRepository.UnitOfWork.SaveChangesAsync(ct);
             
             if (!await _activityRepository.UnitOfWork.SaveEntitiesAsync(ct))
             {

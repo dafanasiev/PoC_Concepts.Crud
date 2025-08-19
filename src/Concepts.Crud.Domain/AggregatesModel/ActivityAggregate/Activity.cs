@@ -89,45 +89,29 @@ public class Activity
         IsGroup = aIsGroup;
     }
 
-    public void SetRelationshipList(IEnumerable<SetRelationshipListArgItem> list)
+    public void SetRelationshipList(IEnumerable<ActivityRelationship> list, SetListValueMode mode)
     {
-        //TODO: bad perfomance
-        var existsList = new List<ActivityRelationship>(RelationshipList.Count);
-        foreach (var i in list)
+        switch (mode)
         {
-            foreach (var ei in RelationshipList)
+            case SetListValueMode.Merge:
+                throw new NotImplementedException("merge not implemented");
+            case SetListValueMode.Replace:
             {
-                if (ei.RelationshipTypeId == i.RelationshipType.Id && ei.EntityRefId == i.TargetSpecification.Id)
+                foreach (var ar in RelationshipList)
                 {
-                    existsList.Add(ei);
-                    goto exists;
+                    ar.Delete();
                 }
+                RelationshipList.Clear();
+
+                foreach (var ar in list)
+                {
+                    RelationshipList.Add(ar);
+                }
+
+                break;
             }
-
-            // not exists
-            var newItem = new ActivityRelationship(this, i.RelationshipType, i.TargetSpecification);
-            RelationshipList.Add(newItem);
-            existsList.Add(newItem);
-
-            exists: ;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(mode), mode, null);
         }
-
-        // cleanup no more exists
-        foreach (var i in RelationshipList.ToList())
-        {
-            foreach (var ei in existsList)
-            {
-                if (i == ei) goto exists;
-            }
-
-            RelationshipList.Remove(i); //TODO: fixme (GCProblem)
-            exists: ;
-        }
-    }
-
-    public class SetRelationshipListArgItem
-    {
-        public RelationshipType RelationshipType { get; set; }
-        public EntityRef TargetSpecification { get; set; } //TOOD: bad spec, targetSpecification.referredClassName?
     }
 }

@@ -34,5 +34,8 @@ public class EntityRefEntityConfiguration
             .HasColumnName("gc")
             .IsRequired(false)
             .HasDefaultValue(null);
+        
+        e.HasQueryFilter(x=>x.GC == null);
+        e.HasIndex(x => x.GC, "gc is null");
     }
 }
