@@ -1,0 +1,877 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Activity Specification",
+        "version": "1.0.0",
+        "description": "API позволяет управлять каталогом действий"
+    },
+    "paths": {
+        "/activity": {
+            "summary": "Управление сущностями каталога действий",
+            "description": "Управление сущностями каталога действий",
+            "get": {
+                "tags": [
+                    "Activity"
+                ],
+                "parameters": [
+                    {
+                        "name": "description",
+                        "description": "Поиск сущности по описанию",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "name",
+                        "description": "Поиск сущности по наименованию",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "code",
+                        "description": "Поиск сущности по коду",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Activity"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "Нет содержимого для ответа на запрос, но заголовки ответа, которые могут быть полезны, присылаются"
+                    },
+                    "206": {
+                        "description": "Сервер удачно выполнил частичный GET-запрос, возвратив только часть сообщения"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Ошибка авторизации"
+                    },
+                    "403": {
+                        "description": "запрос к странице, доступ к которой ограничен"
+                    },
+                    "500": {
+                        "description": "Другие ошибки"
+                    },
+                    "502": {
+                        "description": "Сервер подключения получает некорректный ответ"
+                    },
+                    "503": {
+                        "description": "Сервис недоступен"
+                    }
+                },
+                "operationId": "getActivity",
+                "summary": "getActivity",
+                "description": "Получить список действий"
+            },
+            "post": {
+                "requestBody": {
+                    "description": "При создании в тело запроса передаем ее полное описание",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Activity"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "Activity"
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Activity"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Specification created"
+                    },
+                    "400": {
+                        "description": "Сервер не понимает запрос из-за неверного синтаксиса"
+                    },
+                    "401": {
+                        "description": "Для получения запрашиваемого ответа нужна аутентификация"
+                    },
+                    "403": {
+                        "description": "У клиента нет прав доступа к содержимому"
+                    },
+                    "500": {
+                        "description": "Сервер столкнулся с ситуацией, которую он не знает как обработать"
+                    },
+                    "502": {
+                        "description": "Сервер, во время работы в качестве шлюза для получения ответа, нужного для обработки запроса, получил недействительный (недопустимый) ответ"
+                    },
+                    "503": {
+                        "description": "Сервис недоступен"
+                    }
+                },
+                "deprecated": false,
+                "operationId": "createActivity",
+                "summary": "createActivity",
+                "description": "Создать новое действие"
+            }
+        },
+        "/activity/{id}": {
+            "summary": "Получение информации о сущности каталога действий и обновление информации в ней",
+            "description": "Получение информации о сущности каталога действий и обновление информации в ней",
+            "get": {
+                "tags": [
+                    "Activity"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Activity"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "Нет содержимого для ответа на запрос, но заголовки ответа, которые могут быть полезны, присылаются"
+                    },
+                    "206": {
+                        "description": "Сервер удачно выполнил частичный GET-запрос, возвратив только часть сообщения"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Ошибка авторизации"
+                    },
+                    "403": {
+                        "description": "запрос к странице, доступ к которой ограничен"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Другие ошибки"
+                    },
+                    "502": {
+                        "description": "Сервер подключения получает некорректный ответ"
+                    },
+                    "503": {
+                        "description": "Сервис недоступен"
+                    }
+                },
+                "operationId": "getActivityById",
+                "summary": "getActivityById",
+                "description": "Получить действие по индентификатору"
+            },
+            "delete": {
+                "tags": [
+                    "Activity"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "operationId": "deleteActivitySpecificationById",
+                "summary": "deleteActivityById",
+                "description": "Удалить действие по идентификатору"
+            },
+            "patch": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Activity"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "Activity"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Activity"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    },
+                    "502": {
+                        "description": "Bad Gateway"
+                    },
+                    "503": {
+                        "description": "Service Unavailable"
+                    }
+                },
+                "operationId": "patchActivityById",
+                "summary": "patchActivityById",
+                "description": "Обновить описательные (собственные) атрибуты действия"
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "description": "Идентификатор сущности в системе",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/activity/graph": {
+            "summary": "Управление сущностями каталога действий",
+            "description": "Управление сущностями каталога действий",
+            "get": {
+                "tags": [
+                    "Activity"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ActivityGraph"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "Нет содержимого для ответа на запрос, но заголовки ответа, которые могут быть полезны, присылаются"
+                    },
+                    "206": {
+                        "description": "Сервер удачно выполнил частичный GET-запрос, возвратив только часть сообщения"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Ошибка авторизации"
+                    },
+                    "403": {
+                        "description": "запрос к странице, доступ к которой ограничен"
+                    },
+                    "500": {
+                        "description": "Другие ошибки"
+                    },
+                    "502": {
+                        "description": "Сервер подключения получает некорректный ответ"
+                    },
+                    "503": {
+                        "description": "Сервис недоступен"
+                    }
+                },
+                "operationId": "getActivityGraph",
+                "summary": "getActivityGraph",
+                "description": "Получить граф списка действий"
+            }
+        },
+        "/activity/{activityId}/relationship": {
+            "summary": "Работа со связями Activity",
+            "description": "Работа со связями Activity",
+            "get": {
+                "tags": [
+                    "Relationship"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ActivityRelationship"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "204": {
+                        "description": "Нет содержимого для ответа на запрос, но заголовки ответа, которые могут быть полезны, присылаются"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Ошибка авторизации"
+                    },
+                    "403": {
+                        "description": "запрос к странице, доступ к которой ограничен"
+                    },
+                    "500": {
+                        "description": "Другие ошибки"
+                    },
+                    "502": {
+                        "description": "Сервер подключения получает некорректный ответ"
+                    },
+                    "503": {
+                        "description": "Сервис недоступен"
+                    }
+                },
+                "operationId": "getActivityRelationship",
+                "summary": "getActivityRelationship",
+                "description": "Получить список связей Activity"
+            },
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/ActivityRelationship"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "Relationship"
+                ],
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ActivityRelationship"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Created"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    },
+                    "502": {
+                        "description": "Bad Gateway"
+                    },
+                    "503": {
+                        "description": "Service Unavailable"
+                    }
+                },
+                "operationId": "createActivityRelationship",
+                "summary": "createActivityRelationship",
+                "description": "Добавить связь Activity"
+            },
+            "parameters": [
+                {
+                    "name": "activityId",
+                    "description": "Идентификатор Activity",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/activity/{activityId}/relationship/{Id}": {
+            "summary": "Работа со связями Activity",
+            "description": "Работа со связями Activity",
+            "get": {
+                "tags": [
+                    "Relationship"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ActivityRelationship"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "Нет содержимого для ответа на запрос, но заголовки ответа, которые могут быть полезны, присылаются"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Ошибка авторизации"
+                    },
+                    "403": {
+                        "description": "запрос к странице, доступ к которой ограничен"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Другие ошибки"
+                    },
+                    "502": {
+                        "description": "Сервер подключения получает некорректный ответ"
+                    },
+                    "503": {
+                        "description": "Сервис недоступен"
+                    }
+                },
+                "operationId": "getActivityRelationshipById",
+                "summary": "getActivityRelationshipById",
+                "description": "Получить связь Activity по id Activity и id связи"
+            },
+            "delete": {
+                "tags": [
+                    "Relationship"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "operationId": "deleteActivityRelationshipById",
+                "summary": "deleteActivityRelationshipById",
+                "description": "Удалить связь Activity по id Activity и id связи"
+            },
+            "patch": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ActivityRelationship"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "Relationship"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ActivityRelationship"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    },
+                    "502": {
+                        "description": "Bad Gateway"
+                    },
+                    "503": {
+                        "description": "Service Unavailable"
+                    }
+                },
+                "operationId": "putActivityRelationshipById",
+                "summary": "putActivityRelationshipById",
+                "description": "Обновить связь Activity по id Activity и id связи"
+            },
+            "parameters": [
+                {
+                    "name": "activityId",
+                    "description": "идентификатор Activity",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                },
+                {
+                    "name": "Id",
+                    "description": "идентификатор связи",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/activity/relationship/type": {
+            "summary": "Работа со связями действий",
+            "description": "Работа со связями действий",
+            "get": {
+                "tags": [
+                    "RelationshipType"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/RelationshipType"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "204": {
+                        "description": "Нет содержимого для ответа на запрос, но заголовки ответа, которые могут быть полезны, присылаются"
+                    },
+                    "206": {
+                        "description": "Сервер удачно выполнил частичный GET-запрос, возвратив только часть сообщения"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Ошибка авторизации"
+                    },
+                    "403": {
+                        "description": "запрос к странице, доступ к которой ограничен"
+                    },
+                    "500": {
+                        "description": "Другие ошибки"
+                    },
+                    "502": {
+                        "description": "Сервер подключения получает некорректный ответ"
+                    },
+                    "503": {
+                        "description": "Сервис недоступен"
+                    }
+                },
+                "operationId": "getActivityRelationshipType",
+                "summary": "getActivityRelationshipType",
+                "description": "Получить список типов связей"
+            }
+        },
+        "/activity/type/": {
+            "summary": "Работа со связями действий",
+            "description": "Работа со типами Activity",
+            "get": {
+                "tags": [
+                    "ActivityType"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ActivityType"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "204": {
+                        "description": "Нет содержимого для ответа на запрос, но заголовки ответа, которые могут быть полезны, присылаются"
+                    },
+                    "206": {
+                        "description": "Сервер удачно выполнил частичный GET-запрос, возвратив только часть сообщения"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Ошибка авторизации"
+                    },
+                    "403": {
+                        "description": "запрос к странице, доступ к которой ограничен"
+                    },
+                    "500": {
+                        "description": "Другие ошибки"
+                    },
+                    "502": {
+                        "description": "Сервер подключения получает некорректный ответ"
+                    },
+                    "503": {
+                        "description": "Сервис недоступен"
+                    }
+                },
+                "operationId": "getActivityType",
+                "summary": "getActivityType",
+                "description": "Получить список типов Activity"
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ActivityGraph": {
+                "description": "Базовый класс, описывающий спецификацию сущности \"действие\"",
+                "required": [
+                    "type",
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "format": "uuid",
+                        "description": "уникальный идентификатор действий",
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "code": {
+                        "description": "код действия понятный человеку. Требований уникальности нет",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "тип действия. Просто string, не FK",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "наименование действия",
+                        "type": "string"
+                    },
+                    "isGroup": {
+                        "description": "признак, является ли действие группой действий (задач). Если не передается то false",
+                        "type": "boolean"
+                    },
+                    "relationship": {
+                        "description": "массив связей в которых текущий объект выступает в качестве source_activity",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ActivityRelationship"
+                        }
+                    }
+                }
+            },
+            "ActivityRelationship": {
+                "description": "Базовый класс, определяющий связи  между действиями",
+                "required": [
+                    "targetSpecification",
+                    "relationshipType"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "format": "uuid",
+                        "description": "идентификатор связи",
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "relationshipType": {
+                        "$ref": "#/components/schemas/RelationshipType",
+                        "description": "тип связи"
+                    },
+                    "targetSpecification": {
+                        "$ref": "#/components/schemas/EntityRef",
+                        "description": "связываемая спецификация"
+                    }
+                }
+            },
+            "Activity": {
+                "description": "Базовый класс, описывающий спецификацию сущности \"действие\"",
+                "required": [
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "format": "uuid",
+                        "description": "уникальный идентификатор действий",
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "code": {
+                        "description": "код действия понятный человеку. Требований уникальности нет",
+                        "type": "string"
+                    },
+                    "className": {
+                        "description": "имя класса генерируемый атрибут, не храним в БД",
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/ActivityType",
+                        "description": "тип действия. Просто string, не FK"
+                    },
+                    "name": {
+                        "description": "наименование действия",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "описание действия",
+                        "type": "string"
+                    },
+                    "isGroup": {
+                        "description": "признак, является ли действие группой действий (задач). Если не передается то false",
+                        "type": "boolean"
+                    },
+                    "relationship": {
+                        "description": "массив связей в которых текущий объект выступает в качестве source_activity",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ActivityRelationship"
+                        }
+                    }
+                }
+            },
+            "EntityRef": {
+                "description": "Ссылка на связанную с ресурсом сущность (базовый абстрактный класс)",
+                "required": [
+                    "id",
+                    "href",
+                    "referredClassName",
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "format": "uuid",
+                        "description": "Сквозной системный идентификатор, уникальным образом идентифицирующий объект, на который ссылается сущность",
+                        "type": "string"
+                    },
+                    "href": {
+                        "description": "Полная ссылка по которой можно сделать запрос к ресурсу, определенному ссылкой. Read-only атрибут \"href используется в ответах на GET запросы.",
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "referredClassName": {
+                        "description": "Класс объекта, на который ссылается данный ресурс",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "название",
+                        "type": "string",
+                        "readOnly": true
+                    }
+                }
+            },
+            "ActivityType": {
+                "description": "Базовый класс, определяющий типы Activity",
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "format": "uuid",
+                        "description": "идентификатор типа связи",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "название типа связи",
+                        "type": "string",
+                        "readOnly": true
+                    }
+                }
+            },
+            "RelationshipType": {
+                "description": "Базовый класс, определяющий типы связи  между действиями",
+                "required": [
+                    "id"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "format": "uuid",
+                        "description": "идентификатор типа связи",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "название типа связи",
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "description": {
+                        "description": "описание типа связи",
+                        "type": "string",
+                        "readOnly": true
+                    }
+                }
+            }
+        }
+    }
+}

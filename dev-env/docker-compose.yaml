@@ -1,0 +1,14 @@
+services:
+  postgres:
+    build:
+      context: ./postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: crud
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: cruddb
+      POSTGRES_INITDB_ARGS: "-E UTF8"
+      LC_COLLATE: "ru_RU.UTF-8"
+      LC_CTYPE: "ru_RU.UTF-8"

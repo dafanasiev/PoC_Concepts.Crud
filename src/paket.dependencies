@@ -1,0 +1,45 @@
+source https://api.nuget.org/v3/index.json
+
+storage: none
+framework: net8.0
+
+nuget Microsoft.Extensions.Hosting
+nuget System.Text.Json
+
+nuget System.CommandLine ~> 2.0.0-beta6.25358.103
+nuget Hocon.Extensions.Configuration
+nuget NLog.Extensions.Logging
+
+nuget FluentValidation
+
+nuget MediatR
+nuget Microsoft.EntityFrameworkCore
+nuget Microsoft.EntityFrameworkCore.Proxies
+nuget Npgsql.EntityFrameworkCore.PostgreSQL
+
+group DebugOnly
+    source https://api.nuget.org/v3/index.json
+    storage: none
+    framework: net8.0
+
+    nuget Bogus
+
+group EF-Design
+    source https://api.nuget.org/v3/index.json
+    storage: none
+    framework: net8.0
+
+    nuget Microsoft.EntityFrameworkCore.Design ~> 9.0.8
+
+group Test
+    source https://api.nuget.org/v3/index.json
+    storage: none
+    framework: net8.0
+
+    nuget coverlet.collector
+    nuget Microsoft.NET.Test.Sdk
+    nuget xunit
+    nuget xunit.runner.visualstudio
+    nuget Microsoft.AspNetCore.TestHost ~> 8.0.19
+    nuget Microsoft.AspNetCore.Mvc.Testing ~> 8.0.19
+

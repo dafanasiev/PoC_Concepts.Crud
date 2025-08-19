@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <!-- <ImplicitUsings>enable</ImplicitUsings> -->
+    <Nullable>enable</Nullable>
+    <RootNamespace>Concepts.Crud.Domain</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="MediatR.Contracts">
+      <HintPath>..\..\..\..\..\.nuget\packages\mediatr.contracts\2.0.1\lib\netstandard2.0\MediatR.Contracts.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <Import Project="..\.paket\Paket.Restore.targets"/>
+  
+</Project>

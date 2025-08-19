@@ -1,0 +1,6 @@
+Microsoft.Extensions.Hosting
+Npgsql.EntityFrameworkCore.PostgreSQL
+MediatR
+
+group EF-Design
+    Microsoft.EntityFrameworkCore.Design

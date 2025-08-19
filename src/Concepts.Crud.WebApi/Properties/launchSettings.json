@@ -1,0 +1,11 @@
+﻿{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "webapi": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "WEBAPI_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

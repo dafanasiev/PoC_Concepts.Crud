@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <!-- <ImplicitUsings>enable</ImplicitUsings> -->
+    <Nullable>enable</Nullable>
+    <RootNamespace>Concepts.Crud.Infrastructure</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Concepts.Crud.Domain\Concepts.Crud.Domain.csproj" />
+  </ItemGroup>
+
+  <Import Project="..\.paket\Paket.Restore.targets"/>
+  
+</Project>

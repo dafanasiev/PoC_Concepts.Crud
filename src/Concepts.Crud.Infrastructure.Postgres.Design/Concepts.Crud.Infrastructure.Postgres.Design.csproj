@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <!-- <ImplicitUsings>enable</ImplicitUsings> -->
+        <Nullable>enable</Nullable>
+        <RootNamespace>Concepts.Crud.Infrastructure.Postgres</RootNamespace>
+        <DisableMSBuildAssemblyCopyCheck>true</DisableMSBuildAssemblyCopyCheck>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <ProjectReference Include="..\Concepts.Crud.Infrastructure\Concepts.Crud.Infrastructure.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <Compile Include="..\Concepts.Crud.Infrastructure.Postgres\**\*.cs" 
+                 Exclude="**\obj\**;**\bin\**;**\Migrations\**"  />
+    </ItemGroup>
+    
+  <Import Project="..\.paket\Paket.Restore.targets"/>
+</Project>

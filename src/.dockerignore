@@ -1,0 +1,16 @@
+**
+
+!Concepts.Crud.WebApi/**
+
+**/obj/**
+**/bin/**
+
+!.config/**
+!global.json
+
+!.paket/**
+!paket.dependencies
+!paket.lock
+
+!*.props
+!*.targets

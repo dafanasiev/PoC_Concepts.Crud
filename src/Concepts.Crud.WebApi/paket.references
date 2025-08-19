@@ -1,0 +1,13 @@
+System.Text.Json
+System.CommandLine
+NLog.Extensions.Logging
+Hocon.Extensions.Configuration
+
+FluentValidation
+MediatR
+
+Microsoft.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.Proxies
+
+group DebugOnly
+    Bogus
