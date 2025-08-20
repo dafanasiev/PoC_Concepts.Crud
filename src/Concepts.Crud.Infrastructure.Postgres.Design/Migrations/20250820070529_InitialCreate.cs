@@ -154,10 +154,12 @@ namespace Concepts.Crud.Infrastructure.Postgres.Migrations
                 column: "gc");
 
             migrationBuilder.CreateIndex(
-                name: "IX_activity_relationship_activity_id",
+                name: "IX_activity_relationship_activity_id_relationship_type_id_enti~",
                 schema: "crud",
                 table: "activity_relationship",
-                column: "activity_id");
+                columns: new[] { "activity_id", "relationship_type_id", "entity_ref_id" },
+                unique: true,
+                filter: "gc IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_activity_relationship_entity_ref_id",

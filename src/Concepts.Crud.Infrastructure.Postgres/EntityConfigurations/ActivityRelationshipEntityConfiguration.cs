@@ -50,9 +50,16 @@ public class ActivityRelationshipEntityConfiguration
             .HasColumnName("gc")
             .IsRequired(false)
             .HasDefaultValue(null);
+
+        e
+            .HasQueryFilter(x => x.GC == null)
+            .HasIndex(x => x.GC, "gc is null");
+
+        e
+            .HasIndex(x => new {x.ActivityId, x.RelationshipTypeId, x.EntityRefId})
+            .HasFilter("gc IS NOT NULL")
+            .IsUnique();
         
-        e.HasQueryFilter(x=>x.GC == null);
-        e.HasIndex(x => x.GC, "gc is null");
 #if false
         e.HasOne(x=>x.ActivityGraph)
             .WithMany(x=>x.ActivityRelationshipList)

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Concepts.Crud.Infrastructure.Postgres.Migrations
 {
     [DbContext(typeof(CrudContext))]
-    [Migration("20250820060701_InitialCreate")]
+    [Migration("20250820070529_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -98,11 +98,13 @@ namespace Concepts.Crud.Infrastructure.Postgres.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ActivityId");
-
                     b.HasIndex("EntityRefId");
 
                     b.HasIndex("RelationshipTypeId");
+
+                    b.HasIndex("ActivityId", "RelationshipTypeId", "EntityRefId")
+                        .IsUnique()
+                        .HasFilter("gc IS NOT NULL");
 
                     b.HasIndex(new[] { "GC" }, "gc is null")
                         .HasDatabaseName("gc is null1");
