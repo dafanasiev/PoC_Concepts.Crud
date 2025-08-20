@@ -37,7 +37,7 @@ group Test
 
     nuget coverlet.collector
     nuget Microsoft.NET.Test.Sdk
-    nuget xunit
+    nuget xunit.v3
     nuget xunit.runner.visualstudio
     nuget Microsoft.AspNetCore.TestHost ~> 8.0.19
     nuget Microsoft.AspNetCore.Mvc.Testing ~> 8.0.19

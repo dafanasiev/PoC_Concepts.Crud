@@ -1,6 +1,6 @@
 group Test
     coverlet.collector
     Microsoft.NET.Test.Sdk
-    xunit
+    xunit.v3
     xunit.runner.visualstudio
     Microsoft.AspNetCore.Mvc.Testing

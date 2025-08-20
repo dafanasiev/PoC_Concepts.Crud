@@ -36,7 +36,7 @@ public abstract class SimpleEntity
 
         return true;
     }
-    
+
     public static bool operator ==(SimpleEntity? left, SimpleEntity? right)
     {
         if (ReferenceEquals(left, null))
@@ -56,7 +56,7 @@ public abstract class Entity : SimpleEntity
     /// <summary>
     /// int>0 indicates that record was deleted (deferred deletion)
     /// </summary>
-    public uint? GC { get; set; }
+    public uint? GC { get; private set; }
 
     public override bool Equals(object? obj)
     {
@@ -70,8 +70,12 @@ public abstract class Entity : SimpleEntity
 
         return false;
     }
-}
 
+    public virtual void Delete()
+    {
+        GC = (uint) DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+    }
+}
 
 public abstract class SimpleEntity<TId> : SimpleEntity
     where TId : IEquatable<TId>
@@ -91,7 +95,7 @@ public abstract class SimpleEntity<TId> : SimpleEntity
         {
             if (obj is not SimpleEntity<TId> other)
                 return false;
-            
+
             if (other.IsTransient() || IsTransient())
                 return false;
 
@@ -126,11 +130,6 @@ public abstract class SimpleEntity<TId> : SimpleEntity
 public abstract class Entity<TId> : Entity
     where TId : IEquatable<TId>
 {
-    public virtual void Delete()
-    {
-        GC = (uint)DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-    }
-
     int? _requestedHashCode;
     TId? _Id;
 
@@ -146,7 +145,7 @@ public abstract class Entity<TId> : Entity
         {
             if (obj is not Entity<TId> other)
                 return false;
-            
+
             if (other.IsTransient() || IsTransient())
                 return false;
 

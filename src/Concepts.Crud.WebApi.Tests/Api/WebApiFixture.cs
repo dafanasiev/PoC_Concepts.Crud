@@ -24,19 +24,13 @@ public class WebApiFixture
         return _app;
     }
 
-    public Task InitializeAsync()
+    public ValueTask InitializeAsync()
     {
         //await _app.StartAsync();
-        return Task.CompletedTask;
+        return ValueTask.CompletedTask;
     }
 
     public override async ValueTask DisposeAsync()
-    {
-        await ((IAsyncLifetime) this).DisposeAsync();
-        GC.SuppressFinalize(this);
-    }
-
-    async Task IAsyncLifetime.DisposeAsync()
     {
         if (_app != null)
         {
