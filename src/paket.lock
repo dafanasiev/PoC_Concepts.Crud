@@ -2,8 +2,6 @@ STORAGE: NONE
 RESTRICTION: == net8.0
 NUGET
   remote: https://api.nuget.org/v3/index.json
-    Castle.Core (5.2.1)
-      System.Diagnostics.EventLog (>= 6.0)
     FluentValidation (12.0)
     Hocon (2.0.4)
       NETStandard.Library (>= 1.6.1)
@@ -23,11 +21,6 @@ NUGET
       Microsoft.Extensions.Logging (>= 9.0.8)
     Microsoft.EntityFrameworkCore.Abstractions (9.0.8)
     Microsoft.EntityFrameworkCore.Analyzers (9.0.8)
-    Microsoft.EntityFrameworkCore.Proxies (9.0.8)
-      Castle.Core (>= 5.1.1)
-      Microsoft.EntityFrameworkCore (>= 9.0.8)
-      Microsoft.Extensions.Caching.Memory (>= 9.0.8)
-      Microsoft.Extensions.Logging (>= 9.0.8)
     Microsoft.EntityFrameworkCore.Relational (9.0.8)
       Microsoft.EntityFrameworkCore (>= 9.0.8)
       Microsoft.Extensions.Caching.Memory (>= 9.0.8)

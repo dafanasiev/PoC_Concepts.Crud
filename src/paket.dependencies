@@ -14,7 +14,6 @@ nuget FluentValidation
 
 nuget MediatR
 nuget Microsoft.EntityFrameworkCore
-nuget Microsoft.EntityFrameworkCore.Proxies
 nuget Npgsql.EntityFrameworkCore.PostgreSQL
 
 group DebugOnly

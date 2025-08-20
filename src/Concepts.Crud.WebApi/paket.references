@@ -7,7 +7,6 @@ FluentValidation
 MediatR
 
 Microsoft.EntityFrameworkCore
-Microsoft.EntityFrameworkCore.Proxies
 
 group DebugOnly
     Bogus
